@@ -23,7 +23,7 @@ namespace AddSharedParamSample
 
             // this is a variable for the current Revit model
             Document doc = uiapp.ActiveUIDocument.Document;
-            string paramName = "Ceiling Height 2";
+            string paramName = "Ceiling Height";
 
             // check if param exists
             if(Utils.DoesProjectParamExist(doc, paramName))

@@ -77,6 +77,10 @@ namespace AddSharedParamSample
                 //create param
                 curDef = AddParamToFile(defFile, groupName, paramName);
             }
+            else
+            {
+                curDef = GetParameterDefinitionFromFile(defFile, groupName, paramName);
+            }
 
             //check if param is added to views - if not then add
             if (ParamAddedToFile(curDoc, paramName) == false)
@@ -84,6 +88,24 @@ namespace AddSharedParamSample
                 //add parameter to current Revitfile
                 AddParamToDocument(curDoc, curDef, cat);
             }
+        }
+
+        private static Definition GetParameterDefinitionFromFile(DefinitionFile defFile, string groupName, string paramName)
+        {
+            // iterate the Definition groups of this file
+            foreach (DefinitionGroup group in defFile.Groups)
+            {
+                if(group.Name == groupName)
+                {
+                    // iterate the difinitions
+                    foreach (Definition definition in group.Definitions)
+                    {
+                        if (definition.Name == paramName)
+                            return definition;
+                    }
+                }
+            }
+            return null;
         }
 
         //check if specified parameter is already added to Revit file
